@@ -34,5 +34,16 @@ jobs:
         push: true
         tags: mosama25/react-app-cicd:${{ github.sha }}
         context: .
-       
-       
+
+  deploy:
+     runs-on: ubuntu-latest
+     steps:
+     - name: SSH into server
+       uses: appleboy/ssh-action@v1.0.3
+       with:
+         host: ${{ secrets.SSH_HOST }}
+         username: ${{ secrets.SSH_USER }}
+         key: ${{ secrets.SSH_PRIVATE_KEY }}
+         strict: false
+         script: |
+             id
