@@ -64,6 +64,6 @@ jobs:
 
       - name: Deploy Docker Image to Railway
         env:
-          RAILWAY_TOKEN: a525ba23-d6c2-4171-9cde-30c1f6c4d141
+          RAILWAY_TOKEN: cc97ee25-0704-47fa-b7da-575e9f773ea7
         run: |
-          railway up --environment staging --service mohamed --detach  --project 2a2efb88-868e-49b8-b5e9-9fe6eb9da080
+          railway redeploy --service=mohamed -y
