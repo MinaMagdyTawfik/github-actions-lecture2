@@ -1,0 +1,52 @@
+name: EC2-CICD-pages
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [ "main" ]
+
+permissions:
+  packages: write
+  pages: write
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v6.1.0
+      with:
+        # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
+        node-version: 20
+    - name: Installing Dependencies
+      run: npm install
+    - name: lint Phase
+      run:  npm run lint
+    - name: unit test
+      run: npm run test
+    - name: Building Static Files
+      run: npm run build
+ 
+    - name: upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: react-app-build
+        path: dist/
+    
+
+
+  deploy:    
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+        - name: Download build artifacts
+          uses: actions/download-artifact@v3
+          with:
+            name: react-app-build
+
+        - name: Deploy to Github Pages
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./react-app-build
