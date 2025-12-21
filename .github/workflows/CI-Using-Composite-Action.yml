@@ -33,7 +33,7 @@ jobs:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
             image_name: react-app-cicd
-            image_tag: ${{ github.sha }}
+            tag: ${{ github.sha }}
            
   
   
