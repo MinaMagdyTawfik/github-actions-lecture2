@@ -26,10 +26,13 @@ jobs:
       run: npm run test
     - name: Building Static Files
       run: npm run build 
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
           languages: 'javascript'
+    - name: Autobuild CodeQL
+      uses: github/codeql-action/autobuild@v3
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
 
