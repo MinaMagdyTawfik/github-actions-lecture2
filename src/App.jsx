@@ -8,7 +8,7 @@ export default function App() {
 //   console.log(undefinedVariable); // This will fail - variable not defined
 //   return <div>Test</div>;
 // }
-export default function App_vulnerable() {
+ function App_vulnerable() {
   const userInput = new URLSearchParams(window.location.search).get("msg");
 
   return (
