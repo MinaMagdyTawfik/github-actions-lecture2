@@ -9,10 +9,10 @@ on:
        options:
          - production
          - staging
-  push:
-      branches:
-        - production
-        - staging
+  # push:
+  #     branches:
+  #       - production
+  #       - staging
 
 permissions:
   packages: write
