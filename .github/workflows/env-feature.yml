@@ -10,7 +10,7 @@ on:
 jobs:
     job_1:
         runs-on: ubuntu-latest
-        # environment: ${{ github.event.inputs.environment }}
+        environment: ${{ github.event.inputs.environment }}
         steps:
             - name: deploy
               run: echo "${{vars.environment_txt}}"
