@@ -1,0 +1,16 @@
+name: deploy on two servers
+on: 
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: choose deploying environment
+                type: choice
+                required: true
+                options: ['staging' , 'production']
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        environment:
+            name: deploy on ${{github.event.inputs.environment}} server
+        steps:
+            - run: echo "deploying on ${{vars.environment_txt}} server"
