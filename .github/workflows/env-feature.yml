@@ -1,4 +1,4 @@
-name: deploy on two servers
+name: env feature
 on: 
     workflow_dispatch:
         inputs:
