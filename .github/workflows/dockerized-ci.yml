@@ -2,6 +2,8 @@ name: dockerized ci
 on:
     push:
     pull_request:
+permissions:
+  packages: write
 jobs:
     job_1:
         runs-on: ubuntu-latest
