@@ -1,0 +1,49 @@
+name: expression practice
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+        inputs:
+           environment:
+               type: string
+               default: dev
+               description: write down the environment
+                         
+jobs: 
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: branch check
+              if: startswith(github.ref,'main')
+              run: echo "Main branch"
+            - name: if fail
+              if: failure()
+              run: echo "other branch"
+    job2:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: commit message check
+              if: contains(github.event.head_commit.message,'fix')
+              run: echo "the commit message using formatted string "
+            - name: show event data
+              run: echo "${{ toJSON(github.event) }}"
+            - name: environment value
+              run: echo "${{ github.event.inputs.environment }}"
+    job3:
+        runs-on: ubuntu-latest
+        steps:
+            - name: always
+              if: always()
+              run: echo "this step will always run"    
+            - name: success
+              if: success()
+              run: echo "this step will run if previous step successed "   
+            - name: failure
+              run: hhhhhhhhh
+            - name: failure
+              if: failure()
+              run: "this step will run if previous step fails "  
+            - name: cancelled
+              if: cancelled()
+              run: "this step will run if job is cancaelled "  
+    
