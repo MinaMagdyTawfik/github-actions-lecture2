@@ -17,13 +17,13 @@ jobs:
             - run: npm run test
             - run: npm run build
             - name: docker login
-              uses: docker/login-actions@v2
+              uses: docker/login-action@v2
               with:
                 registery: ghcr.io
                 username:  ${{ github.actor }}
                 password: ${{ secrets.GITHUB_TOKEN }}
             - name: build 
-              uses: docker/build-push-actions@v6.18.0
+              uses: docker/build-push-action@v6.18.0
               with: 
                 push: true
                 tags: ghcr.io/${{ github.actor }}/react-app-cicd:latest , ghcr.io/${{ github.actor }}/react-app-cicd:${{github.sha}}
