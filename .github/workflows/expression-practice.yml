@@ -39,7 +39,7 @@ jobs:
               if: success()
               run: echo "this step will run if previous step successed "   
             - name: failure
-              run: exit 1
+              run: hhhhhhh
             - name: failure
               if: failure()
               run: echo "this step will run if previous step fails "  
