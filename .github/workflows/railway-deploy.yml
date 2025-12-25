@@ -34,9 +34,9 @@ jobs:
         needs: job1
         container:
             image: ghcr.io/railwayapp/cli:latest
-        env:
-            RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-            SERVICE_NAME : REACT-APP
+            env:
+                RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+                SERVICE_NAME : REACT-APP
         steps:
             - name: deploy on railway
               run: railway redeploy --service=$SERVICE_NAME -y 
