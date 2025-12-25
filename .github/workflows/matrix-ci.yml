@@ -1,0 +1,19 @@
+name: matrix-ci
+on:
+    push:
+    workflow_dispatch:
+jobs:
+    job1:
+        runs-on: ${{matrix.os}}
+        strategy:
+            matrix:
+                os: [ubuntu-latest,windows-latest]
+                ver: [16,18,20]
+                exclude:
+                    - os: windows-latest
+                      ver: 16
+                include:
+                    - os: ubuntu-latest
+                      ver: 21
+            fail-fast: true
+            max-parallel: 2
