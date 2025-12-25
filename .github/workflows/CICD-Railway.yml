@@ -42,7 +42,7 @@ jobs:
   
   deploy_railway:
       runs-on: ubuntu-latest
-      needs: build
+      needs: build 
       container:
          image: ghcr.io/railwayapp/cli:latest
          env: 
