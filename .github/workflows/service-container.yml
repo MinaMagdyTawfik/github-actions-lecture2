@@ -19,5 +19,6 @@ jobs:
           run: |
             curl -f http://nginx
         - name: check apache ervice 
+          if: always()
           run: | 
             curl -f http://apache
