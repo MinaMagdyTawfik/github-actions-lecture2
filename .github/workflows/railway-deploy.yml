@@ -1,0 +1,40 @@
+name: railway deploy
+on:
+    push:
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+            - name: install node version
+              uses: actions/setup-node@v6
+              with:
+                node-version: 20
+            - run: npm install
+            - run: npm run lint
+            - run: npm run test
+            - run: npm run build
+            - name: docker login
+              uses: docker/login-action@v2
+              with:
+                registry: ghcr.io
+                username: ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+            - name: upload code as docker image
+              uses: docker/build-push-action@v6.2.0
+              with:
+                push: true
+                tags: ghcr.io/${{ github.actor }}/reactapp:latest,ghcr.io/${{ github.actor }}/reactapp:${{github.sha}}
+                context: .
+    job2:
+        runs-on: ubuntu-latest
+        needs: job1
+        container:
+            image: ghcr.io/railwayapp/cli:latest
+        env:
+            RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+            SERVICE_NAME : REACT-APP
+        steps:
+            - name: deploy on railway
+              run: railway redeploy --service=$SERVICE_NAME -y 
