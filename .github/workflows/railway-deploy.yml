@@ -10,7 +10,7 @@ jobs:
         steps:
             - name: code checkout
               uses: actions/checkout@v4
-            - name: install node version
+            - name: install node version 
               uses: actions/setup-node@v6
               with:
                 node-version: 20
